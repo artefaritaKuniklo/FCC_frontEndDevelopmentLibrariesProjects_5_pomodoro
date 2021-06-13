@@ -53,7 +53,8 @@ class App extends React.Component {
           return Object.assign({}, prevState, {
             sessionLength: Math.max(prevState.sessionLength + time, 0),
           });
-        });
+      });
+    this.sync()
   };
   modiBreakTime = (time) => {
     time > 0
@@ -66,7 +67,8 @@ class App extends React.Component {
           return Object.assign({}, prevState, {
             breakLength: Math.max(prevState.breakLength + time, 0),
           });
-        });
+      });
+    this.sync()
   };
   sync = () => {
     this.state.isBreak
@@ -93,7 +95,7 @@ class App extends React.Component {
       });
     } else {
       //  Turn ON
-      this.sync();
+      // this.sync();
       this.setState((prevState) => {
         return Object.assign({}, prevState, {
           targetTime: this.state.timeLeft + Date.now(),
@@ -131,11 +133,11 @@ class App extends React.Component {
                 ? prevState.sessionLength
                 : prevState.breakLength,
               isBreak: !prevState.isBreak,
-              timerStarted:false
+              timerStarted: false,
             });
           });
           document.getElementById("beep").play();
-          this.switchOn()
+          this.switchOn();
         }
       }, 100);
     }
